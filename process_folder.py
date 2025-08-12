@@ -2,7 +2,7 @@ import os
 import re
 import logging
 from tools.TIKA_extractor import TIKA_text_extract  # Apache Tika wrapper for text extraction
-from mongo_writer import write_to_mongodb  # Custom MongoDB writer module
+from tools.mongo_writer import write_to_mongodb  # Custom MongoDB writer module
 from tools.text_functions import remove_multiple_newlines, get_word_count, file_filter, path_filter
 
 # Set path to the folder that contains the files

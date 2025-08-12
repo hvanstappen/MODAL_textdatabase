@@ -1,13 +1,26 @@
+# This script adds estimated creation date to records
+
 import os
 from datetime import datetime
 from pymongo import MongoClient
 
 # Connect to the MongoDB server
 client = MongoClient("mongodb://localhost:27017/")  # Update URI as needed
-db = client["MODAL_testdata"]  # Replace with  database name
-collection = db["LH_UitgeverijVrijdag"]  # Replace with  collection name
+db = client["MODAL_data"]  # Replace with  database name
+collection = db["collection_name"]  # Replace with  collection name
+
 
 def get_file_creation_date(file_path):
+    """
+    Get the creation date of a file in ISO 8601 format.
+
+    Args:
+        file_path (str): Path to the file
+
+    Returns:
+        str: File creation date in ISO 8601 format (YYYY-MM-DDThh:mm:ssZ) if successful
+        None: If file not found or error occurs
+    """
     print(f'\nProcessing path {file_path}')
     try:
         # Get file creation time in seconds since the epoch
@@ -19,6 +32,7 @@ def get_file_creation_date(file_path):
         print(f"Error retrieving file creation date for {file_path}: {e}")
     return None
 
+# loop through records
 counter = 0
 for record in collection.find():
     counter += 1

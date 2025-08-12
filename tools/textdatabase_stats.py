@@ -1,13 +1,25 @@
+"""
+This script analyzes a MongoDB collection containing document metadata and generates
+a CSV summary of MIME types statistics. For each MIME type, it calculates:
+- Total number of files
+- Total word count
+- Number of files with zero words
+- List of detected languages
+The summary is saved to a CSV file with totals row at the bottom.
+"""
+
 import csv
 from pymongo import MongoClient
 from collections import defaultdict
 
+
 def summarize_mime_types():
     # Connect to MongoDB
     client = MongoClient("mongodb://localhost:27017/")  # Update with your connection details if needed
-    db = client["MODAL_sourcedata"]
-    collection_name = "ADVN_VEA260_VUJO"
+    db = client["MODAL_data"] # Replace with your database name
+    collection_name = "collection_name" # Replace with your collection name
     collection = db[collection_name]
+    csv_filename = f"../log_files/{collection_name}_summary.csv" # Replace with your desired output filepath for stats
 
     # Initialize summary dictionary
     summary = defaultdict(lambda: {
@@ -35,7 +47,7 @@ def summarize_mime_types():
     print(f'total_words: {summary[mime_type]["total_words"]}')
 
     # Prepare CSV output  /home/henk/DATABLE/1_Projecten/2024_MODAL/3_Data/TIKA_statistics
-    csv_filename = f"/home/henk/DATABLE/1_Projecten/2024_MODAL/3_Data/TIKA_statistics/{collection_name}_summary.csv"
+
     with open(csv_filename, mode="w", newline="", encoding="utf-8") as csv_file:
         csv_writer = csv.writer(csv_file)
         # Write header

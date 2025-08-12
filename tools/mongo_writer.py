@@ -38,10 +38,6 @@ def write_to_mongodb(file_mimetype, file, tika_parser, extracted_text, path, lan
     # Return the MongoDB record ID
     return result.inserted_id
 
-    # print(f"Document inserted with ID: {result.inserted_id}")
-    # print(f"Repeat: inserted with id {result_id}")
-
-
 # Example usage:
 # if __name__ == "__main__":
 #     file_path = "example.pdf"  # Replace with the actual file path

@@ -4,10 +4,14 @@ from pymongo import MongoClient
 import re
 from tools.TIKA_extractor import tika_extract_correspondents
 
-# Connect to the MongoDB server
-client = MongoClient("mongodb://localhost:27017/")  # Update URI as needed
-db = client["MODAL_data"]  # Replace with database name
-collection = db["collection_name"]  # Replace with collection name
+# SET DB COLLECTION:
+database_name = "MODAL_data" # Replace with database name
+collection_name = "collection_name" # Replace with collection name
+
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client[database_name]
+collection = db[collection_name]
 
 # Use filters to find records with file_path containing ".eml" or ".msg"
 query_filter = {

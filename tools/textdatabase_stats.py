@@ -12,13 +12,17 @@ import csv
 from pymongo import MongoClient
 from collections import defaultdict
 
-
 def summarize_mime_types():
+    # SET DB COLLECTION:
+    database_name = "MODAL_data"  # Replace with database name
+    collection_name = "collection_name"  # Replace with collection name
+
     # Connect to MongoDB
-    client = MongoClient("mongodb://localhost:27017/")  # Update with your connection details if needed
-    db = client["MODAL_data"] # Replace with your database name
-    collection_name = "collection_name" # Replace with your collection name
+    client = MongoClient("mongodb://localhost:27017/")
+    db = client[database_name]
     collection = db[collection_name]
+
+    # Set output location
     csv_filename = f"../log_files/{collection_name}_summary.csv" # Replace with your desired output filepath for stats
 
     # Initialize summary dictionary

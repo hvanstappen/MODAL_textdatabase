@@ -4,10 +4,14 @@ import os
 from datetime import datetime
 from pymongo import MongoClient
 
-# Connect to the MongoDB server
-client = MongoClient("mongodb://localhost:27017/")  # Update URI as needed
-db = client["MODAL_data"]  # Replace with  database name
-collection = db["collection_name"]  # Replace with  collection name
+# SET DB COLLECTION:
+database_name = "MODAL_data" # Replace with database name
+collection_name = "collection_name" # Replace with collection name
+
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client[database_name]
+collection = db[collection_name]
 
 
 def get_file_creation_date(file_path):

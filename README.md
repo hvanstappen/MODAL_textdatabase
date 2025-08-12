@@ -84,7 +84,7 @@ Each processed document is stored with the following information:
 - Creator information
 
 ## Best Practices
-1. Ensure MongoDB is running before executing the script
+1. Ensure MongoDB is running on localhost:27017
 2. Verify write permissions for the log directory
 3. Monitor log files for any processing errors
 4. Back up important data before processing large directories
@@ -93,3 +93,49 @@ Each processed document is stored with the following information:
 - Requires sufficient disk space for log files
 - Processing time depends on file sizes and quantity
 - Memory usage scales with file size during processing
+
+# Document Embedding Generator
+
+## Overview
+This project provides tools for generating and storing document embeddings using state-of-the-art transformer models. It's designed to work with MongoDB for document storage and retrieval, making it suitable for large-scale document processing applications.
+
+## Features
+- Multi-lingual document support
+- Text preprocessing (stopwords and numbers removal)
+- MongoDB integration for document storage
+- Progress tracking for long-running processes
+- Support for batch document processing
+
+## Prerequisites
+### System Requirements
+- Python 3.x
+- MongoDB Server (running on localhost:27017)
+- Sufficient RAM to handle document embeddings
+
+
+## Usage
+1. Ensure your MongoDB collection contains documents with:
+   - `extracted_text` field containing the document text
+   - `language` field specifying the document language
+   - `word_count` field with the number of words
+
+2. Run the embedding generator
+e.g. python create_embeddings.py
+
+
+## Processing Flow
+1. Documents are filtered (minimum 10 words required)
+2. Text is cleaned by removing:
+   - Language-specific stopwords
+   - Numerical values
+3. Embeddings are generated using SentenceTransformer
+4. Results are stored back in MongoDB
+
+## Performance Considerations
+- Processing time depends on:
+  - Document length
+  - Number of documents
+  - Available computational resources
+- Embeddings increase document storage size significantly
+
+

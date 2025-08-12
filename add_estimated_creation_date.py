@@ -1,4 +1,9 @@
-# This script adds estimated creation date to records
+# This Python script is meant to add or update estimated creation dates in a MongoDB collection, based on file metadata and existing record fields.
+# The script connects to a MongoDB collection, looks at each record, and tries to get the file creation date from the file system  (using the file_path stored in MongoDB).
+# If the record already has a creation_date, it uses that. # If not, it uses the file’s actual creation date.
+# Then the script determines the best guess for the creation date, and writes it back to MongoDB.
+# - "file_creation_date" → the actual file system creation date.
+# - "estimated_creation_date" → the best guess (either creation_date or file_creation_date).
 
 import os
 from datetime import datetime

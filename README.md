@@ -2,8 +2,12 @@
 Document Processing and MongoDB storage script
 
 ## Overview
-This script processes documents from a specified directory, extracts their text content using Apache Tika, and stores the processed information in MongoDB. It includes logging capabilities and handles various document types while maintaining processing statistics. It's designed to work with MongoDB for document storage and retrieval and relies on the Apache Tika toolset 
-MODAL Document Embedding Generator is a script for generating and storing document embeddings using transformer models.
+This script processes documents from a specified directory, extracts their text content using Apache Tika, and stores the processed information in MongoDB. It includes logging capabilities and handles various document types while maintaining processing statistics. It's designed to work with MongoDB for document storage and retrieval and relies on the Apache Tika toolset. 
+
+Additional tools:
+- create_embeddings.py is a script for generating and storing document embeddings using transformer models.
+- add_email_correspondents : adds names of senders and recipients of email messages.
+- add_estimated_creation_date : adds a 'best guess' for the file creation date.
 
 ## Prerequisites
 - Python 3.x

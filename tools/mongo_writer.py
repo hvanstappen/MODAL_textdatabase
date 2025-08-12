@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from tika import parser
 
 
-def write_to_mongodb(file_mimetype, file, tika_parser, extracted_text, path, lang, word_count, creation_date, creator, db_name, collection_name, mongo_uri="mongodb://localhost:27017/"):
+def write_to_mongodb(file_mimetype, file, tika_parser, extracted_text, path, lang, word_count, creation_date, creator, db_name, collection_name, mongo_uri):
     """
     Extracts text from a file and writes it to a MongoDB collection.
 

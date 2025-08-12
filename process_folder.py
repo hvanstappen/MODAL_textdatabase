@@ -6,13 +6,12 @@ from tools.mongo_writer import write_to_mongodb  # Custom MongoDB writer module
 from tools.text_functions import remove_multiple_newlines, get_word_count, file_filter, path_filter
 
 # Set path to the folder that contains the files
-path = "/path/to/files"
+path = "/home/henk/DATABLE/0_Facturen/2025Q3/IN"
 
-# Set database name
-db_name = "MODAL_data"
-
-# Generate collection name safely
-collection_name = re.split(r"[/]+", path)[-1].replace(' ','_')
+# SET DB COLLECTION:
+mongo_uri = "mongodb://localhost:27017/" # Replace with your MongoDB URI
+database_name = "MODAL_data" # Replace with database name
+collection_name = re.split(r"[/]+", path)[-1].replace(' ','_')  # Generate collection name
 
 # Generate logging file path
 log_dir = "log_files"
@@ -60,9 +59,9 @@ try:
 
                     record_id = write_to_mongodb( # Write to MongoDB
                         mime_type, file, tika_parser, clean_content, file_path, lang,
-                        word_count, creation_date, creator, db_name, collection_name
+                        word_count, creation_date, creator, database_name, collection_name, mongo_uri
                     )
-                    print(f"{file} written to {record_id} in {db_name}")
+                    print(f"{file} written to {record_id} in {database_name}")
                 else:
                     print(f"{file} is ignored.")
             except Exception as e:

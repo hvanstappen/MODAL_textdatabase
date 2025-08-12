@@ -1,15 +1,15 @@
 import os
 import re
 import logging
-from tools.TIKA_extractor import TIKA_text_extract
-from mongo_writer import write_to_mongodb
+from tools.TIKA_extractor import TIKA_text_extract  # Apache Tika wrapper for text extraction
+from mongo_writer import write_to_mongodb  # Custom MongoDB writer module
 from tools.text_functions import remove_multiple_newlines, get_word_count, file_filter, path_filter
 
 # Set path to the folder that contains the files
-path = "/media/henk/LaCie/2025_MODAL/test_email_attach"
+path = "/path/to/files"
 
 # Set database name
-db_name = "MODAL_testdata"
+db_name = "MODAL_data"
 
 # Generate collection name safely
 collection_name = re.split(r"[/]+", path)[-1].replace(' ','_')
@@ -31,6 +31,7 @@ num_tot_files = 0
 num_processed_files = 0
 num_extract_texts = 0
 
+# Process files in the folder recursively
 try:
     for root, _, files in os.walk(path):
         for file in files:
@@ -43,7 +44,7 @@ try:
                     num_processed_files += 1
                     tika = TIKA_text_extract(file_path)
 
-                    if not tika or len(tika) < 6:
+                    if not tika or len(tika) < 6: # Check if tika output is valid
                         raise ValueError("Unexpected TIKA output structure")
 
                     mime_type, content, tika_parser, lang, creation_date, creator = (
@@ -53,10 +54,11 @@ try:
                     if content and len(content) > 0:
                         num_extract_texts += 1
 
-                    clean_content = remove_multiple_newlines(content)
-                    word_count = get_word_count(content)
+                    clean_content = remove_multiple_newlines(content) # Remove multiple newlines from the text
 
-                    record_id = write_to_mongodb(
+                    word_count = get_word_count(clean_content) # Calculate word count
+
+                    record_id = write_to_mongodb( # Write to MongoDB
                         mime_type, file, tika_parser, clean_content, file_path, lang,
                         word_count, creation_date, creator, db_name, collection_name
                     )
@@ -70,6 +72,7 @@ except Exception as e:
     logging.exception(f"An error occurred while processing the folder: {e}")
     print("Critical error. Check log for details.")
 
+# Print final statistics
 print('Total files:', num_tot_files)
 print('Processed files:', num_processed_files)
 print('Extracted texts:', num_extract_texts)

@@ -3,11 +3,7 @@ import re
 import nltk
 from nltk.corpus import stopwords
 
-# Check if stopwords are downloaded
-try:
-    stopwords.words("english")  # Check English stopwords as indicator
-except LookupError:
-    nltk.download("stopwords")  # Download stopwords only if not available
+
 
 def get_word_count(text):
     """
@@ -38,6 +34,12 @@ def remove_multiple_newlines(text):
         cleaned_text = None
     return(cleaned_text)
 
+# Check if stopwords are downloaded
+try:
+    stopwords.words("english")  # Check English stopwords as indicator
+except LookupError:
+    nltk.download("stopwords")  # Download stopwords only if not available
+
 def remove_stopwords(text, language):
     """
     Removes stopwords from the given text.
@@ -58,7 +60,6 @@ def remove_stopwords(text, language):
 
     # Default to "dutch" if language isn't found in lang_map
     language = lang_map.get(language.lower(), "dutch")
-
 
     # Get the stopwords for the specified language
     stopwords_set = set(stopwords.words(language))

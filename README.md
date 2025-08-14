@@ -153,3 +153,10 @@ e.g. python create_embeddings.py
 - Embeddings increase document storage size significantly
 
 
+==============================================================
+# Speech to text 
+
+
+==============================================================
+# File category
+

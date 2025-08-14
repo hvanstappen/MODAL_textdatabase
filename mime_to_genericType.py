@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 # SET DB COLLECTION:
 database_name = "MODAL_data"
-collection_name = "IN"
+collection_name = "collection_name"
 
 # Connect to MongoDB
 client = MongoClient("mongodb://localhost:27017/")

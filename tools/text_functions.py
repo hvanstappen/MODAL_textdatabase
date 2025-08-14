@@ -54,20 +54,6 @@ def detect_lang(text):
     """
     return detect(text) if text else "und"
 
-# def remove_multiple_newlines(text):
-#     """
-#     Removes excessive newlines from text, keeping at most two consecutive newlines.
-#     Args:
-#         text (str): Text to clean
-#     Returns:
-#         str: Cleaned text with normalized newlines, or None if processing fails
-#     """
-#     try:
-#         cleaned_text = re.sub(r'[\n|\r]{3,}', '\n\n', text)
-#     except:
-#         cleaned_text = None
-#     return(cleaned_text)
-
 def normalize_newlines(text):
     """
     Removes excessive empty lines, keeping at most two consecutive empty lines.

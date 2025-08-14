@@ -1,6 +1,16 @@
 # MODAL_textdatabase
 Document Processing and MongoDB storage script
 
+This set of scripts was created as a deliverable for the [project MODAL](https://advn.be/nl/over-advn/projecten/modal-project).
+
+The research project "Metadata and Access to Digital Archives Using Large Language Models," or MODAL for short, launched in the fall of 2024. MODAL's goal is to investigate the potential applications of generative artificial intelligence (GenAI) for the cultural heritage sector and to disseminate this knowledge within the sector.
+
+This a part of a suite of scripts:
+
+* scripts for text extraction and metadata storage (this repository)
+* [scripts for enrichments](https://github.com/hvanstappen/MODAL_textdatabase)
+* [scripts for browsing and retrieval of documents]()
+
 ## Overview
 This script processes documents from a specified directory, extracts their text content using Apache Tika, and stores the processed information in MongoDB. It includes logging capabilities and handles various document types while maintaining processing statistics. It's designed to work with MongoDB for document storage and retrieval and relies on the Apache Tika toolset. 
 

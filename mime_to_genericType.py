@@ -215,6 +215,6 @@ for record in mongo_records:
             )
             print(f"File: {file_name:<30} | Mime: {file_mimetype:<60} | Generic Type: {generic_type}")
 
-print("--- Missed thes Generic Types ---")
+print("--- Missed these Generic Types ---")
 for generic_type in generic_types:
     print(generic_type)

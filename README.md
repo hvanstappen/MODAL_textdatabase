@@ -160,3 +160,11 @@ e.g. python create_embeddings.py
 ==============================================================
 # File category
 
+==============================================================
+# Clean names in text
+The script `name_corrector.py` uses Rapidfuzz to correct misspelled names in a text. It connects to a MongoDB collection, loads a CSV list of valid names, then scans each document’s extracted_text for possible names.
+It uses fuzzy matching (RapidFuzz) to find misspelled names, replaces them with the correct ones, and updates MongoDB with:
+
+* `extracted_text`: the corrected text
+* `original_text`: the unmodified text
+* `corrections`: a list of unique (original, corrected, match_score) changes made

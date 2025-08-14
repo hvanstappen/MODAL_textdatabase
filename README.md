@@ -168,3 +168,5 @@ It uses fuzzy matching (RapidFuzz) to find misspelled names, replaces them with 
 * `extracted_text`: the corrected text
 * `original_text`: the unmodified text
 * `corrections`: a list of unique (original, corrected, match_score) changes made
+
+The CSV with correct names is in the /tools/data folder 

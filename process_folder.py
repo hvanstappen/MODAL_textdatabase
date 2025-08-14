@@ -3,10 +3,10 @@ import re
 import logging
 from tools.TIKA_extractor import TIKA_text_extract  # Apache Tika wrapper for text extraction
 from tools.mongo_writer import write_to_mongodb  # Custom MongoDB writer module
-from tools.text_functions import remove_multiple_newlines, get_word_count, file_filter, path_filter
+from tools.text_functions import normalize_newlines, get_word_count, file_filter, path_filter
 
 # Set path to the folder that contains the files
-path = "/home/henk/DATABLE/0_Facturen/2025Q3/IN"
+path = "/path/to/folder/with/files"
 
 # SET DB COLLECTION:
 mongo_uri = "mongodb://localhost:27017/" # Replace with your MongoDB URI
@@ -53,7 +53,7 @@ try:
                     if content and len(content) > 0:
                         num_extract_texts += 1
 
-                    clean_content = remove_multiple_newlines(content) # Remove multiple newlines from the text
+                    clean_content = normalize_newlines(content) # Remove multiple newlines from the text
 
                     word_count = get_word_count(clean_content) # Calculate word count
 

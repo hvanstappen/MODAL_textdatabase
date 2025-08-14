@@ -54,19 +54,50 @@ def detect_lang(text):
     """
     return detect(text) if text else "und"
 
-def remove_multiple_newlines(text):
+# def remove_multiple_newlines(text):
+#     """
+#     Removes excessive newlines from text, keeping at most two consecutive newlines.
+#     Args:
+#         text (str): Text to clean
+#     Returns:
+#         str: Cleaned text with normalized newlines, or None if processing fails
+#     """
+#     try:
+#         cleaned_text = re.sub(r'[\n|\r]{3,}', '\n\n', text)
+#     except:
+#         cleaned_text = None
+#     return(cleaned_text)
+
+def normalize_newlines(text):
     """
-    Removes excessive newlines from text, keeping at most two consecutive newlines.
+    Removes excessive empty lines, keeping at most two consecutive empty lines.
+    Lines containing only spaces/tabs are considered empty.
+    Also strips empty lines from the start and end.
+
     Args:
         text (str): Text to clean
     Returns:
-        str: Cleaned text with normalized newlines, or None if processing fails
+        str: Cleaned text with at most two consecutive empty lines, or None if processing fails
     """
     try:
-        cleaned_text = re.sub(r'[\n|\r]{3,}', '\n\n', text)
-    except:
+        # Normalize all line endings
+        text = text.replace("\r\n", "\n").replace("\r", "\n")
+
+        # Replace lines containing only whitespace with a true empty line
+        text = re.sub(r'^[ \t]+$', '', text, flags=re.MULTILINE)
+
+        # Replace 3 or more consecutive newlines with exactly 2 newlines
+        text = re.sub(r'\n{3,}', '\n\n', text)
+
+        # Strip empty lines at start and end
+        text = text.strip('\n')
+
+        cleaned_text = text
+    except Exception:
         cleaned_text = None
-    return(cleaned_text)
+
+    return cleaned_text
+
 
 # Initialize NLTK stopwords
 try:

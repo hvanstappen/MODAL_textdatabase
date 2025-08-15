@@ -107,7 +107,7 @@ Each processed document is stored with the following information:
 - Processing time depends on file sizes and quantity
 - Memory usage scales with file size during processing
   
-============================================================
+
 # Document Embedding Generator
 
 ## Overview
@@ -153,14 +153,35 @@ e.g. python create_embeddings.py
 - Embeddings increase document storage size significantly
 
 
-==============================================================
+
 # Speech to text 
+- Script `srt_to_txt.py` converts SRT files (output from speech-to-text software) to plain text (removing timecodes, merging lines that don't end with a period, question mark, etc.).
+- Option: Apply `name_corrector.py` to correct incorrectly recognized names based on a name list. → see below.
+- `s2toutput_to_textdatabase.py` detects language, counts words, and adds transcriptions to the text database.
 
 
-==============================================================
-# File category
+# File categorisation
+The `mime_to_genericType.py` script contains a function to categorize files based on:
 
-==============================================================
+- The first member of the MIME type determines the type (image, document, audio, etc.).
+- If the first member is 'application': rules to determine the type (for example, if the MIME type contains "dbase," the type is "database").
+- The extension is also used to determine the category. 
+- The category is added to the mongoDB record. 
+- The script reports any uncategorized types.
+
+The following categories are used:
+- Text file (.doc, pdf, ...)
+- Calculation file (.xlsx, ...)
+- Presentation file (ppt, ...)
+- Image file (jpg, tif, ...)
+- Audio file (mp3, mpeg, ...)
+- Video file (mp4, ...)
+- Message file (msg, ...)
+- Compression file (zip, ...)
+- Data file (xml, csv, ...)
+- Font files
+- Other (for example application/x-msdownload, application/vnd.iccprofile)
+
 # Clean names in text
 The script `name_corrector.py` uses Rapidfuzz to correct misspelled names in a text. It connects to a MongoDB collection, loads a CSV list of valid names, then scans each document’s extracted_text for possible names.
 It uses fuzzy matching (RapidFuzz) to find misspelled names, replaces them with the correct ones, and updates MongoDB with:

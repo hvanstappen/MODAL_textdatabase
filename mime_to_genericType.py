@@ -2,8 +2,8 @@ from pymongo import MongoClient
 
 
 # SET DB COLLECTION:
-database_name = "MODAL_data"
-collection_name = "collection_name"
+database_name = "MODAL_testdata"
+collection_name = "LH_HH_71_Hemmerechts"
 
 # Connect to MongoDB
 client = MongoClient("mongodb://localhost:27017/")

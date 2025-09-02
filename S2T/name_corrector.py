@@ -4,7 +4,7 @@ from rapidfuzz import process, fuzz
 from pymongo import MongoClient
 
 # === CONFIG ===
-CSV_FILENAME = "data/valid_people_list.csv"
+CSV_FILENAME = "../tools/data/valid_people_list.csv"
 MATCH_THRESHOLD = 80
 MAX_WORDS = 5
 
